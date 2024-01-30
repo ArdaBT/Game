@@ -1,2 +1,102 @@
-# Auto detect text files and perform LF normalization
-* text=auto
+using System;
+
+class Program
+{
+    static void Main()
+    {
+        Console.WriteLine("Welcome to the Adventure Game!");
+
+        // Step 3: Generate a random number
+        Random random = new Random();
+        int targetNumber = random.Next(1, 101); // Generates a random number between 1 and 100
+
+        int numberOfAttempts = 0;
+        bool hasGuessedCorrectly = false;
+
+        // Adventure Game Elements
+        bool hasItem = false;
+        bool hasAnsweredRiddle = false;
+
+        Console.WriteLine("You find yourself in a mysterious room. Look around for clues.");
+
+        // Step 4: Explore the room and find clues
+        Console.WriteLine("You discover a piece of paper with a clue: 'The answer lies where the sun sets.'");
+        
+        // Step 5: NPC with a riddle
+        Console.WriteLine("Suddenly, an NPC appears and says: 'To proceed, answer this riddle:");
+
+        Console.WriteLine("I speak without a mouth and hear without ears. I have no body, but I come alive with the wind. What am I?'");
+
+        // Step 6: Player tries to answer the riddle
+        string[] riddleOptions = { "Echo", "Whistle", "River", "Mountain", "Cave" };
+
+        for (int i = 0; i < 2; i++)
+        {
+            Console.WriteLine($"Choose an answer (1-5): ");
+            for (int j = 0; j < riddleOptions.Length; j++)
+            {
+                Console.WriteLine($"{j + 1}. {riddleOptions[j]}");
+            }
+
+            int playerAnswer = int.Parse(Console.ReadLine()) - 1;
+
+            if (riddleOptions[playerAnswer].Equals("Echo", StringComparison.OrdinalIgnoreCase))
+            {
+                Console.WriteLine("Congratulations! You've answered the riddle correctly!");
+                hasAnsweredRiddle = true;
+                break;
+            }
+            else
+            {
+                Console.WriteLine("Incorrect answer. Try again.");
+            }
+        }
+
+        if (!hasAnsweredRiddle)
+        {
+            Console.WriteLine("You failed to answer the riddle. The NPC gets angry and attacks you. Game over!");
+            return;
+        }
+
+        // Step 7: Collect the item
+        Console.WriteLine("As a reward for solving the riddle, the NPC gives you a magical key.");
+
+        Console.WriteLine("You see a locked door in the room. Use the magical key to unlock it.");
+
+        Console.WriteLine("The door creaks open, revealing a hidden chamber. Inside, you find a treasure chest!");
+
+        // Step 8: Player collects the item
+        Console.WriteLine("Do you want to open the treasure chest? (yes/no)");
+        string response = Console.ReadLine().ToLower();
+
+        if (response == "yes")
+        {
+            Console.WriteLine("You open the chest and find a glowing orb. You have collected the mystical orb!");
+            hasItem = true;
+        }
+        else
+        {
+            Console.WriteLine("You decide not to open the treasure chest. Maybe later.");
+        }
+
+        // Step 9: Use the item to reveal the final answer
+        if (hasItem)
+        {
+            Console.WriteLine("With the mystical orb in hand, you notice hidden inscriptions on the chamber walls.");
+            Console.WriteLine("The answer to the NPC's riddle is revealed: 'Echo'");
+        }
+
+        // Step 10: Final confrontation
+        Console.WriteLine("Armed with the correct answer and the mystical orb, you confront the NPC once again.");
+
+        if (hasItem && hasAnsweredRiddle)
+        {
+            Console.WriteLine("You confidently present the mystical orb and answer 'Echo'. The NPC nods in approval.");
+            Console.WriteLine("Congratulations! You've successfully completed the adventure!");
+        }
+        else
+        {
+            Console.WriteLine("You attempt to answer the riddle without the required item. The NPC attacks you. Game over!");
+        }
+    }
+}
